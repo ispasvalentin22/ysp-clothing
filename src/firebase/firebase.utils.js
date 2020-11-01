@@ -3,15 +3,16 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 const config = {
-  apiKey: "AIzaSyCNpEBIEhryQAM-SF1vH29dzXsyl-GfcXA",
-  authDomain: "ysp-db.firebaseapp.com",
-  databaseURL: "https://ysp-db.firebaseio.com",
-  projectId: "ysp-db",
-  storageBucket: "ysp-db.appspot.com",
-  messagingSenderId: "109181167417",
-  appId: "1:109181167417:web:17638c9f6464adfdfc6ae8",
-  measurementId: "G-4C85RWKX45"
+  apiKey: 'AIzaSyCdHT-AYHXjF7wOrfAchX4PIm3cSj5tn14',
+  authDomain: 'crwn-db.firebaseapp.com',
+  databaseURL: 'https://crwn-db.firebaseio.com',
+  projectId: 'crwn-db',
+  storageBucket: 'crwn-db.appspot.com',
+  messagingSenderId: '850995411664',
+  appId: '1:850995411664:web:7ddc01d597846f65'
 };
+
+firebase.initializeApp(config);
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
@@ -23,23 +24,20 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!snapShot.exists) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
-
     try {
       await userRef.set({
         displayName,
         email,
         createdAt,
         ...additionalData
-      })
+      });
     } catch (error) {
-      console.log('Error creating user', error.message);
+      console.log('error creating user', error.message);
     }
   }
 
   return userRef;
 };
-
-firebase.initializeApp(config);
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
